@@ -18,8 +18,7 @@ pipeline {
                 script {
                     // Show Maven version, current directory, and file listing for debugging
                     bat "mvn --version"
-                    bat "pwd"
-                    bat 'ls -al'
+                    
                     
                     echo "Versioning POM"
                     
