@@ -17,7 +17,7 @@ pipeline{
                 bat "mvn build-helper:parse-version versions:set -DnewVersion=\$\\{parsedVersion.majorVersion}.\$\\{parsedVersion.minorVersion}.\\${BUILD_VERSION}"
             } 
 			else {
-                bat "mvn build-helper:parse-version versions:set -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository -DnewVersion=\$\\{parsedVersion.majorVersion}.\$\\{parsedVersion.minorVersion}.\\${BUILD_NUMBER}"
+                bat "mvn build-helper:parse-version versions:set -DnewVersion=\$\\{parsedVersion.majorVersion}.\$\\{parsedVersion.minorVersion}.\\${BUILD_NUMBER}"
             }
 			bat "mvn versions:commit"
             echo "Building Artifact"
