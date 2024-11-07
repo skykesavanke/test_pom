@@ -1,11 +1,7 @@
 pipeline{
     stages{
         stage("checkout"){
-            gitVars = checkout([$class: 'GitSCM',
-            branches: [[name: "refs/heads/main"]],
-            extensions: [[$class: 'SubmoduleOption', recursiveSubmodules: true, parentCredentials : true]],
-            userRemoteConfigs: [[url: "https://github.com/skykesavanke/test_pom.git"]]
-            ])
+            git branch : 'main',url:'https://github.com/skykesavanke/test_pom.git'
         }
         stage("build"){
 
