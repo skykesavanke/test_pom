@@ -19,14 +19,14 @@ pipeline {
                     // Show Maven version, current directory, and file listing for debugging
                     bat "mvn --version"
                     
-                    
+                    echo "Build version: ${params.BUILD_VERSION}, Build number: ${params.BUILD_NUMBER}"
                     echo "Versioning POM"
                     
                     // Handling versioning based on BUILD_VERSION or fallback to BUILD_NUMBER
                     if ("${params.BUILD_VERSION}" != '') {
                         bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
                     } else {
-                        bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${BUILD_NUMBER}"
+                        bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
                     }
                     
                     // Commit version changes
@@ -50,6 +50,7 @@ pipeline {
 
                     // Optionally, store version as an environment variable or pass it to subsequent jobs
                     env.PROJECT_VERSION = PROJECT_VERSION
+                    
                 }
             }
         }
