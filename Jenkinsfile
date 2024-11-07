@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'BUILD_VERSION', defaultValue: '5', description: 'Build Version')
+        string(name: 'BUILD_VERSION', defaultValue: '1.0.0', description: 'Build Version')
         string(name: 'BUILD_PROFILE', defaultValue: 'new', description: 'Maven Build Profile')
     }
 
