@@ -45,7 +45,7 @@ pipeline {
                     bat "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
                     
                     // Read the project version and clean up any extra whitespace or newlines
-                    def PROJECT_VERSION = bat(script: 'type env.properties', returnStdout: true).trim()
+                    def PROJECT_VERSION = bat(script: 'type env.properties', returnStdout: true)
                     
                     echo "Artifact version is ${PROJECT_VERSION}"
 
