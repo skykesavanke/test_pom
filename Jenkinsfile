@@ -1,10 +1,13 @@
 pipeline{
     stages{
         stage("checkout"){
+            steps{
             git branch : 'main',url:'https://github.com/skykesavanke/test_pom.git'
+        }
         }
         stage("build"){
 
+            steps{
         bat "mvn --version"
             bat "pwd"
             bat 'ls -al'
@@ -24,4 +27,5 @@ pipeline{
 		    PROJECT_VERSION = bat(script: 'cat env.properties', returnStdout: true)
             echo "Artifact version is ${PROJECT_VERSION}"
     }
+        }
 }}
