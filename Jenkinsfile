@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'BUILD_VERSION', defaultValue: '', description: 'Build Version')
-        string(name: 'BUILD_PROFILE', defaultValue: 'default', description: 'Maven Build Profile')
+        string(name: 'BUILD_VERSION', defaultValue: '5', description: 'Build Version')
+        string(name: 'BUILD_PROFILE', defaultValue: 'new', description: 'Maven Build Profile')
     }
 
     stages {
