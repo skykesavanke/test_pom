@@ -20,7 +20,7 @@ pipeline {
                     // Show Maven version, current directory, and file listing for debugging
                     bat "mvn --version"
                     
-                    echo "Build version: ${param.BUILD_VERSION}, Build number: ${params.BUILD_NUMBER}"
+                    echo "Build version: ${params.BUILD_VERSION}, Build number: ${params.BUILD_NUMBER}"
                     echo "Versioning POM"
                     
                     // Handling versioning based on BUILD_VERSION or fallback to BUILD_NUMBER
