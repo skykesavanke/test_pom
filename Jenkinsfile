@@ -18,35 +18,35 @@ pipeline {
             steps {
                 script {
                     
-                    sh "mvn --version"
+                    bat "mvn --version"
                     
                     echo "Build version: ${params.BUILD_VERSION}, Build number: ${params.BUILD_NUMBER}"
                     echo "Versioning POM"
                     
                     
                     // if ("${params.BUILD_VERSION}" != '') {
-                    //     sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
+                    //     bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
                         
                     // } else {
-                    //     sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
+                    //     bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
                     // }
                     
                    
-                    // sh "mvn versions:commit"
+                    // bat "mvn versions:commit"
                     
                     echo "Building Artifact"
                     
                     // Build artifact with skipping tests and other steps
-                    sh "mvn clean package -P${params.BUILD_PROFILE} -Dmaven.test.skip=true -Dexec.skip=true -Dcreate-archive.skip=true"
+                    bat "mvn clean package -P${params.BUILD_PROFILE} -Dmaven.test.skip=true -Dexec.skip=true -Dcreate-archive.skip=true"
                     echo "Artifact built successfully"
                     
                     // echo "Exporting project version to env vars and passing it to deploy job"
                     
                     // // Capture the project version
-                    // sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
+                    // bat "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
                     
                     // // Read the project version and clean up any extra whitespace or newlines
-                    // def PROJECT_VERSION = sh(script: 'cat env.properties', returnStdout: true)
+                    // def PROJECT_VERSION = bat(script: 'cat env.properties', returnStdout: true)
                     
                     // echo "Artifact version is ${PROJECT_VERSION}"
 
