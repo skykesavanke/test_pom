@@ -64,17 +64,17 @@ pipeline {
 
      post {
         success {
-            script {
+            steps {
                 sendNotification('SUCCESS')
             }
         }
         failure {
-            script {
+            steps {
                 sendNotification('FAILURE')
             }
         }
         unstable {
-            script {
+            steps {
                 sendNotification('UNSTABLE')
             }
         }
