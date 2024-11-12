@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'BUILD_VERSION', defaultValue: '3', description: 'Build Version')
-        string(name: 'BUILD_PROFILE', defaultValue: 'new', description: 'Maven Build Profile')
+        string(name: 'BUILD_PROFILE', defaultValue: 'cloud, description: 'Maven Build Profile')
         string(name: 'BUILD_NUMBER', defaultValue: '2', description: 'Maven Build Number')
     }
 
@@ -24,15 +24,15 @@ pipeline {
                     echo "Versioning POM"
                     
                     
-                    // if ("${params.BUILD_VERSION}" != '') {
-                    //     bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
-                        
-                    // } else {
-                    //     bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
-                    // }
+                     if ("${params.BUILD_VERSION}" != '') {
+                       bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
+                    
+                    } else {
+                         bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
+                    }
                     
                    
-                    // bat "mvn versions:commit"
+                    bat "mvn versions:commit"
                     
                     echo "Building Artifact"
                     
@@ -40,18 +40,18 @@ pipeline {
                     bat "mvn clean package -P${params.BUILD_PROFILE} -Dmaven.test.skip=true -Dexec.skip=true -Dcreate-archive.skip=true"
                     echo "Artifact built successfully"
                     
-                    // echo "Exporting project version to env vars and passing it to deploy job"
+                    echo "Exporting project version to env vars and passing it to deploy job"
                     
-                    // // Capture the project version
-                    // bat "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
+                    // Capture the project version
+                    bat "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
                     
-                    // // Read the project version and clean up any extra whitespace or newlines
-                    // def PROJECT_VERSION = bat(script: 'cat env.properties', returnStdout: true)
+                    // Read the project version and clean up any extra whitespace or newlines
+                    def PROJECT_VERSION = bat(script: 'cat env.properties', returnStdout: true)
                     
-                    // echo "Artifact version is ${PROJECT_VERSION}"
+                    echo "Artifact version is ${PROJECT_VERSION}"
 
-                    // // Optionally, store version as an environment variable or pass it to subsequent jobs
-                    // env.PROJECT_VERSION = PROJECT_VERSION
+                    // Optionally, store version as an environment variable or pass it to subsequent jobs
+                    env.PROJECT_VERSION = PROJECT_VERSION
                     
                 }
             }
