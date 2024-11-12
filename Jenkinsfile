@@ -64,19 +64,19 @@ pipeline {
 
      post {
         success {
-            steps {
+            
                 sendNotification('SUCCESS')
-            }
+            
         }
         failure {
-            steps {
+            
                 sendNotification('FAILURE')
-            }
+            
         }
         unstable {
-            steps {
+            
                 sendNotification('UNSTABLE')
-            }
+            
         }
      }
 
