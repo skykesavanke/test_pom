@@ -25,25 +25,25 @@ pipeline {
                     
                     
                      if ("${params.BUILD_VERSION}" != '') {
-                       bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_VERSION}"
+                       bat "mvn build-helper:parse-version versions:set -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_VERSION}"
                     
                     } else {
-                         bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_NUMBER}"
+                         bat "mvn build-helper:parse-version versions:set -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_NUMBER}"
                     }
                     
                    
-                    bat "mvn versions:commit"
+                    bat "mvn versions:commit -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository"
                     
                     echo "Building Artifact"
                     
                     // Build artifact with skipping tests and other steps
-                    bat "mvn clean package -P${params.BUILD_PROFILE} -Dmaven.test.skip=true -Dexec.skip=true -Dcreate-archive.skip=true"
+                    bat "mvn clean package -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository -P${params.BUILD_PROFILE} -Dmaven.test.skip=true -Dexec.skip=true -Dcreate-archive.skip=true"
                     echo "Artifact built successfully"
                     
                     echo "Exporting project version to env vars and passing it to deploy job"
                     
                     // Capture the project version
-                    bat "mvn help:evaluate -Dexpression=project.version -q -DforceStdout > env.properties"
+                    bat "mvn help:evaluate -Dmaven.repo.local=${env.WORKSPACE}/.m2/repository -Dexpression=project.version -q -DforceStdout > env.properties"
                     
                     // Read the project version and clean up any extra whitespace or newlines
                     def PROJECT_VERSION = bat(script: 'type env.properties', returnStdout: true)
