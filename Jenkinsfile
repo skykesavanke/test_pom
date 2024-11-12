@@ -79,9 +79,10 @@ pipeline {
             
         }
      }
+}
     def sendNotification(status) {
     // Add your notification logic here, e.g., send a message to Slack
     echo "Notification sent with status: ${status}"
 }
 
-}
+
