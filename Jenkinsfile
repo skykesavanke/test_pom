@@ -1,5 +1,9 @@
+@Library('slack')
 pipeline {
     agent any
+    environment {
+        SLACK_CHANNEL = 'keerthusspace' // Slack channel to send notifications
+    }
 
     parameters {
         string(name: 'BUILD_VERSION', defaultValue: '3', description: 'Build Version')
@@ -58,12 +62,22 @@ pipeline {
         }
     }
 
-    post {
+     post {
         success {
-            echo "Build and versioning successful"
+            script {
+                sendNotification('SUCCESS')
+            }
         }
         failure {
-            echo "Build failed"
+            script {
+                sendNotification('FAILURE')
+            }
         }
-    }
+        unstable {
+            script {
+                sendNotification('UNSTABLE')
+            }
+        }
+     }
+
 }
