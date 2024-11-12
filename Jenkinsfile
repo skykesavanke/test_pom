@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'BUILD_VERSION', defaultValue: '3', description: 'Build Version')
-        string(name: 'BUILD_PROFILE', defaultValue: 'cloud, description: 'Maven Build Profile')
+        string(name: 'BUILD_PROFILE', defaultValue: 'cloud", description: 'Maven Build Profile')
         string(name: 'BUILD_NUMBER', defaultValue: '2', description: 'Maven Build Number')
     }
 
