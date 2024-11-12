@@ -25,10 +25,10 @@ pipeline {
                     
                     
                      if ("${params.BUILD_VERSION}" != '') {
-                       bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_VERSION}"
+                       bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_VERSION}"
                     
                     } else {
-                         bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${params.BUILD_NUMBER}"
+                         bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.${params.BUILD_NUMBER}"
                     }
                     
                    
