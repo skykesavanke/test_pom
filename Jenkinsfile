@@ -1,4 +1,5 @@
 @Library('slack') _
+slackNotifier 'buildStatus'
 pipeline {
     agent any
     environment {
