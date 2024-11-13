@@ -1,5 +1,5 @@
-@Library('slack') _
-slackNotifier 'buildStatus'
+@Library('slacklib') _
+
 pipeline {
     agent any
     environment {
@@ -66,24 +66,20 @@ pipeline {
      post {
         success {
             
-                sendNotification('SUCCESS')
+               slackNotifier('SUCCESS')
             
         }
         failure {
             
-                sendNotification('FAILURE')
+                 slackNotifier('FAILURE')
             
         }
         unstable {
             
-                sendNotification('UNSTABLE')
+                 slackNotifier('UNSTABLE')
             
         }
      }
-}
-    def sendNotification(status) {
-    // Add your notification logic here, e.g., send a message to Slack
-    echo "Notification sent with status: ${status}"
 }
 
 
