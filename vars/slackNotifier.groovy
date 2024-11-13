@@ -1,6 +1,6 @@
 
 
-def sendNotification(String buildStatus) {
+def slackNotifier(String buildStatus) {
     // Build status logic as per your function
     buildStatus = buildStatus ?: 'STARTED'
 
