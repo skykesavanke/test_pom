@@ -1,6 +1,6 @@
 
 
-def slackNotifier(String buildStatus) {
+def slackNotifier(Map params) {
     // Build status logic as per your function
     buildStatus = buildStatus ?: 'STARTED'
 
