@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-        SLACK_CHANNEL = 'keerthusspace' // Slack channel to send notifications
+        SLACK_CHANNEL = 'notifychannel' // Slack channel to send notifications
     }
 
     parameters {
@@ -63,23 +63,17 @@ pipeline {
         }
     }
 
-     post {
+    post {
         success {
-            
-               slackNotifier('SUCCESS')
-            
+            slackNotifier(buildStatus: 'SUCCESS')
         }
         failure {
-            
-                 slackNotifier('FAILURE')
-            
+            slackNotifier(buildStatus: 'FAILURE')
         }
         unstable {
-            
-                 slackNotifier('UNSTABLE')
-            
+            slackNotifier(buildStatus: 'UNSTABLE')
         }
-     }
+    }
 }
 
 
