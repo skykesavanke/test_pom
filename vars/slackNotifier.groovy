@@ -1,10 +1,6 @@
+// vars/slackNotifier.groovy
 
-
-
-
-def slackNotifier(Map params) {
-    String buildStatus = params.buildStatus ?: 'STARTED'
-
+def call(String buildStatus = 'STARTED') {
     def colorCode = '#FF0000'
     if (buildStatus == 'SUCCESS') {
         colorCode = '#36A64F'
@@ -13,5 +9,6 @@ def slackNotifier(Map params) {
     }
 
     def message = "*${buildStatus}:* Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+
     slackSend(color: colorCode, message: message, channel: "#${env.SLACK_CHANNEL}")
 }
