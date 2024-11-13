@@ -66,17 +66,17 @@ pipeline {
     post {
         success {
             steps {
-            slackNotifier(buildStatus: 'SUCCESS')
+            slackNotifier('SUCCESS')
         }
         }
         failure {
             steps {
-            slackNotifier(buildStatus: 'FAILURE')
+            slackNotifier('FAILURE')
         }
         }
         unstable {
             steps {
-            slackNotifier(buildStatus: 'UNSTABLE')
+            slackNotifier('UNSTABLE')
         }
         }
     }
