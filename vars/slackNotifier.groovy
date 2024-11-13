@@ -1,8 +1,9 @@
 
 
+
+
 def slackNotifier(Map params) {
-    // Build status logic as per your function
-    buildStatus = buildStatus ?: 'STARTED'
+    String buildStatus = params.buildStatus ?: 'STARTED'
 
     def colorCode = '#FF0000'
     if (buildStatus == 'SUCCESS') {
